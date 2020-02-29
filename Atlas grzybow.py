@@ -95,10 +95,10 @@ while (loop == 1):
                     continue
                 else:
                     break
-                
+
     elif (wybor == "WYJDZ"):
         os._exit(0)
 
     else:
-        print("Nie wpisałeś prawidłowej komendy. Możliwe komendy: POKAZ / SZUKAJ / DODAJ / USUN")
+        print("Nie wpisałeś prawidłowej komendy. Możliwe komendy: POKAZ / SZUKAJ / DODAJ / USUN / WYJDZ")
         continue
