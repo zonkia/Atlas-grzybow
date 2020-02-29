@@ -3,7 +3,7 @@ print("Wpisz POKAZ, aby zobaczyc wszystkie wpisy")
 print("Wpisz SZUKAJ, aby wyszukac interesującego Ciebie grzyba")
 print("Wpisz DODAJ, aby dodać nowego grzyba i opis")
 print("Wpisz USUN, aby usunąć grzyba z atlasu")
-hddhd
+
 loop = 1
 loopSearch = 1
 loopDelete = 1
