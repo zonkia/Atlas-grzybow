@@ -1,8 +1,11 @@
+import os
+
 print("Witaj w atlasie grzybów. Wybierz co chcesz zrobić:")
 print("Wpisz POKAZ, aby zobaczyc wszystkie wpisy")
 print("Wpisz SZUKAJ, aby wyszukac interesującego Ciebie grzyba")
 print("Wpisz DODAJ, aby dodać nowego grzyba i opis")
 print("Wpisz USUN, aby usunąć grzyba z atlasu")
+print("Wpisz WYJDZ, aby wyjsc z atlasu")
 
 loop = 1
 loopSearch = 1
@@ -92,6 +95,10 @@ while (loop == 1):
                     continue
                 else:
                     break
+                
+    elif (wybor == "WYJDZ"):
+        os._exit(0)
+
     else:
         print("Nie wpisałeś prawidłowej komendy. Możliwe komendy: POKAZ / SZUKAJ / DODAJ / USUN")
         continue
