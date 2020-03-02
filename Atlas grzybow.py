@@ -15,12 +15,19 @@ loop = 1
 loopSearch = 1
 loopDelete = 1
 
+indeksy = {}
 atlas = {
-            "Prawdziwek": {"Rozmiar": "Śr. Kapelusza: 6-25cm; Wys. trzonu: 20cm; Szer. trzonu: 1,5-10cm", "Kolor": "Jasnobrązowy / ciemnobrązowy", "Jadalny": "Tak"},
-            "Muchomor": {"Rozmiar": "Śr. Kapelusza: do 20cm; Wys. trzonu: 20cm; Szer. trzonu: do 3cm", "Kolor": "Czerwony kapelusz z białymi kropkami", "Jadalny": "Nie"},
-            "Kurka": {"Rozmiar": "Śr. Kapelusza: 1-12cm; Wys. trzonu: 3-6cm; Szer. trzonu: do 2,5cm", "Kolor": "Żółty / pomarańczowożółty", "Jadalny": "Tak"},
-            "Purchawka": {"Rozmiar": "Śr. Kapelusza: 2-4cm; Wys. trzonu: 3-7cm; Szer. trzonu: do 2,5cm", "Kolor": "Biały / Brązowy", "Jadalny": "Nie"}
+            "Prawdziwek": {"Wysokość [cm]": 20, "Śr. Kapelusza [cm]": 25, "Szer. trzonu [cm]": 5, "Kolor": "Jasnobrązowy / ciemnobrązowy", "Jadalny": "Tak"},
+            "Muchomor": {"Wysokość [cm]": 20, "Śr. Kapelusza [cm]": 20, "Szer. trzonu [cm]": 5, "Kolor": "Czerwony kapelusz z białymi kropkami", "Jadalny": "Nie"},
+            "Kurka": {"Wysokość [cm]": 5, "Śr. Kapelusza [cm]": 8, "Szer. trzonu [cm]": 2.5, "Kolor": "Żółty / pomarańczowożółty", "Jadalny": "Tak"},
+            "Purchawka": {"Wysokość [cm]": 7, "Śr. Kapelusza [cm]": 4, "Szer. trzonu [cm]": 4, "Kolor": "Biały / Brązowy", "Jadalny": "Nie"}
 }
+
+for nazwy in atlas:
+    for cechy in atlas[nazwy]:
+        if cechy == "Wysokość [cm]":
+            x = atlas[nazwy]["Wysokość [cm]"] * atlas[nazwy]["Śr. Kapelusza [cm]"] * atlas[nazwy]["Szer. trzonu [cm]"]
+            indeksy[nazwy] = x
 
 while True:
     print()
@@ -118,7 +125,7 @@ while True:
 
     elif (wybor == "FILTR"):
         while True:
-            filtr = str(input("Wpisz jakie chcesz wyfiltrować grzyby: JADALNE, NIEJADALNE: ").upper())
+            filtr = str(input("Wpisz jakie chcesz wyfiltrować grzyby: JADALNE, NIEJADALNE, MALE, SREDNIE, DUZE: ").upper())
             if (filtr == "JADALNE"):
                 kolejnoscFiltr = str(input("Czy lista jadalnych grzybów ma być wyświetlona od A->Z? TAK/NIE ").upper())
                 if kolejnoscFiltr == "TAK":
@@ -155,7 +162,65 @@ while True:
                         for cechy in atlas[nazwy]:
                             if (atlas[nazwy][cechy] == "Nie"):
                                 print(nazwy,", Jadalny: ",atlas[nazwy][cechy])
-                    break             
+                    break
+
+            elif (filtr == "MALE"):
+                kolejnoscFiltr = str(input("Czy lista małych grzybów ma być wyświetlona od A->Z? TAK/NIE ").upper())
+                if kolejnoscFiltr == "TAK":
+                    print()
+                    print("Lista małych grzybów od A->Z:")
+                    for grzyby in sorted(indeksy.keys()):
+                        if (indeksy[grzyby] < 500):
+                            print(grzyby,"- Wysokość [cm]:", atlas[grzyby]["Wysokość [cm]"], ", Śr. Kapelusza [cm]:", atlas[grzyby]["Śr. Kapelusza [cm]"],", Szer. trzonu [cm]:", atlas[grzyby]["Szer. trzonu [cm]"])
+                    break
+                    print()
+                else:
+                    print()
+                    print("Lista małych grzybów od Z->A:")
+                    for grzyby in sorted(indeksy.keys(), reverse = True):
+                        if (indeksy[grzyby] < 500):
+                            print(grzyby, "- Wysokość [cm]:", atlas[grzyby]["Wysokość [cm]"], ", Śr. Kapelusza [cm]:", atlas[grzyby]["Śr. Kapelusza [cm]"],", Szer. trzonu [cm]:", atlas[grzyby]["Szer. trzonu [cm]"])
+                    break
+                    print()
+            
+            elif (filtr == "SREDNIE"):
+                kolejnoscFiltr = str(input("Czy lista średnich grzybów ma być wyświetlona od A->Z? TAK/NIE ").upper())
+                if kolejnoscFiltr == "TAK":
+                    print()
+                    print("Lista średnich grzybów od A->Z:")
+                    for grzyby in sorted(indeksy.keys()):
+                        if (indeksy[grzyby] > 500) and (indeksy[grzyby] < 1000):
+                            print(grzyby,"- Wysokość [cm]:", atlas[grzyby]["Wysokość [cm]"], ", Śr. Kapelusza [cm]:", atlas[grzyby]["Śr. Kapelusza [cm]"],", Szer. trzonu [cm]:", atlas[grzyby]["Szer. trzonu [cm]"])
+                    break
+                    print()
+                else:
+                    print()
+                    print("Lista średnich grzybów od Z->A:")
+                    for grzyby in sorted(indeksy.keys(), reverse = True):
+                        if (indeksy[grzyby] < 500):
+                            print(grzyby, "- Wysokość [cm]:", atlas[grzyby]["Wysokość [cm]"], ", Śr. Kapelusza [cm]:", atlas[grzyby]["Śr. Kapelusza [cm]"],", Szer. trzonu [cm]:", atlas[grzyby]["Szer. trzonu [cm]"])
+                    break
+                    print()
+
+            elif (filtr == "DUZE"):
+                kolejnoscFiltr = str(input("Czy lista dużych grzybów ma być wyświetlona od A->Z? TAK/NIE ").upper())
+                if kolejnoscFiltr == "TAK":
+                    print()
+                    print("Lista dużych grzybów od A->Z:")
+                    for grzyby in sorted(indeksy.keys()):
+                        if (indeksy[grzyby] > 1000):
+                            print(grzyby,"- Wysokość [cm]:", atlas[grzyby]["Wysokość [cm]"], ", Śr. Kapelusza [cm]:", atlas[grzyby]["Śr. Kapelusza [cm]"],", Szer. trzonu [cm]:", atlas[grzyby]["Szer. trzonu [cm]"])
+                    break
+                    print()
+                else:
+                    print()
+                    print("Lista dużych grzybów od Z->A:")
+                    for grzyby in sorted(indeksy.keys(), reverse = True):
+                        if (indeksy[grzyby] < 500):
+                            print(grzyby, "- Wysokość [cm]:", atlas[grzyby]["Wysokość [cm]"], ", Śr. Kapelusza [cm]:", atlas[grzyby]["Śr. Kapelusza [cm]"],", Szer. trzonu [cm]:", atlas[grzyby]["Szer. trzonu [cm]"])
+                    break
+                    print()
+
             else:
                 print("Błąd w komendzie. Spróbój ponownie.")
                 continue
