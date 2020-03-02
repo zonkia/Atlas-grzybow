@@ -16,9 +16,10 @@ loopSearch = 1
 loopDelete = 1
 
 atlas = {
-            "Prawdziwek": {"Rozmiar": "Śr. Kapelusza: 6 - 25cm; Wys. trzonu: 20cm; Szer. trzonu: 1,5 - 10cm", "Kolor": "Jasnobrązowy / ciemnobrązowy", "Jadalny": "Tak"},
+            "Prawdziwek": {"Rozmiar": "Śr. Kapelusza: 6-25cm; Wys. trzonu: 20cm; Szer. trzonu: 1,5-10cm", "Kolor": "Jasnobrązowy / ciemnobrązowy", "Jadalny": "Tak"},
             "Muchomor": {"Rozmiar": "Śr. Kapelusza: do 20cm; Wys. trzonu: 20cm; Szer. trzonu: do 3cm", "Kolor": "Czerwony kapelusz z białymi kropkami", "Jadalny": "Nie"},
-            "Kurka": {"Rozmiar": "Śr. Kapelusza: 1 - 12cm; Wys. trzonu: 3 -6cm; Szer. trzonu: do 2,5cm", "Kolor": "Żółty / pomarańczowożółty", "Jadalny": "Tak"}
+            "Kurka": {"Rozmiar": "Śr. Kapelusza: 1-12cm; Wys. trzonu: 3-6cm; Szer. trzonu: do 2,5cm", "Kolor": "Żółty / pomarańczowożółty", "Jadalny": "Tak"},
+            "Purchawka": {"Rozmiar": "Śr. Kapelusza: 2-4cm; Wys. trzonu: 3-7cm; Szer. trzonu: do 2,5cm", "Kolor": "Biały / Brązowy", "Jadalny": "Nie"}
 }
 
 while True:
