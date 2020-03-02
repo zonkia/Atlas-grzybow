@@ -1,13 +1,15 @@
 import os
 
 print("Witaj w atlasie grzybów. Wybierz co chcesz zrobić:")
+print()
+print("Wpisz SPIS, aby zobaczyc spis nazw grzybów w atlasie")
+print("Wpisz FILTR, aby wyświetlnić tylko interesujące Ciebie grzyby")
 print("Wpisz POKAZ, aby zobaczyc wszystkie wpisy")
 print("Wpisz SZUKAJ, aby wyszukac interesującego Ciebie grzyba")
 print("Wpisz DODAJ, aby dodać nowego grzyba i opis")
+print("Wpisz EDYTUJ, aby edytować obecny wpis")
 print("Wpisz USUN, aby usunąć grzyba z atlasu")
 print("Wpisz WYJDZ, aby wyjsc z atlasu")
-print("Wpisz SPIS, aby zobaczyc spis nazw grzybów w atlasie")
-print("Wpisz FILTR, aby wyświetlnić tylko interesujące Ciebie grzyby")
 
 loop = 1
 loopSearch = 1
@@ -55,6 +57,13 @@ while True:
         rozmiarGrzyba = str(input("Podaj wymiary kapelusza i trzonka: "))
         kolorGrzyba = str(input("Podaj jaki kolor i cechy ma kapelusz: "))
         jadalnoscGrzyba = str(input("Czy grzyb jest jadalny? TAK/NIE ").capitalize())
+        while True:
+            if jadalnoscGrzyba == "Tak" or jadalnoscGrzyba == "Nie":
+                break
+            else:
+                print("Błąd. Jadalność grzyba może być tylko TAK lub NIE. Spróbuj ponownie")
+                jadalnoscGrzyba = str(input("Czy grzyb jest jadalny? TAK/NIE ").capitalize())
+                continue
         atlas[nazwaGrzyba] = {"Rozmiar":rozmiarGrzyba, "Kolor":kolorGrzyba, "Jadalny":jadalnoscGrzyba}
         wpis = str(input("Dodano grzyba do atlasu. Czy chcesz zobaczyć wpis? TAK/NIE ").upper())
         if (wpis == "TAK"):
@@ -95,18 +104,93 @@ while True:
                     break
 
     elif (wybor == "SPIS"):
-        rosnacaLista = str(input("Czy lista ma być A-Z? TAK/NIE ").upper())
+        rosnacaLista = str(input("Czy lista ma być wyświetlona od A->Z? TAK/NIE ").upper())
+        print()
         if rosnacaLista == "TAK":
-
+            print("Lista grzybów od A->Z:")
             for nazwy in sorted(atlas.keys()):
                 print(nazwy)
         else:
+            print("Lista grzybów od Z->A:")
             for nazwy in sorted(atlas.keys(), reverse = True):
                 print(nazwy)
 
+    elif (wybor == "FILTR"):
+        while True:
+            filtr = str(input("Wpisz jakie chcesz wyfiltrować grzyby: JADALNE, NIEJADALNE: ").upper())
+            if (filtr == "JADALNE"):
+                kolejnoscFiltr = str(input("Czy lista jadalnych grzybów ma być wyświetlona od A->Z? TAK/NIE ").upper())
+                if kolejnoscFiltr == "TAK":
+                    print()
+                    print("Lista jadalnych grzybów od A->Z:")
+                    for nazwy in sorted(atlas.keys()):
+                        for cechy in atlas[nazwy]:
+                            if (atlas[nazwy][cechy] == "Tak"):
+                                print(nazwy,", Jadalny: ",atlas[nazwy][cechy])
+                    break          
+                else:
+                    print()
+                    print("Lista jadalnych grzybów od Z->A:")
+                    for nazwy in sorted(atlas.keys(), reverse = True):
+                        for cechy in atlas[nazwy]:
+                            if (atlas[nazwy][cechy] == "Tak"):
+                                print(nazwy,", Jadalny: ",atlas[nazwy][cechy])
+                    break
+
+            elif (filtr == "NIEJADALNE"):
+                kolejnoscFiltr = str(input("Czy lista jadalnych grzybów ma być wyświetlona od A->Z? TAK/NIE ").upper())
+                if kolejnoscFiltr == "TAK":
+                    print()
+                    print("Lista niejadalnych grzybów od A->Z:")
+                    for nazwy in sorted(atlas.keys()):
+                        for cechy in atlas[nazwy]:
+                            if (atlas[nazwy][cechy] == "Nie"):
+                                print(nazwy,", Jadalny: ",atlas[nazwy][cechy])
+                    break
+                else:
+                    print()
+                    print("Lista niejadalnych grzybów od Z->A:")
+                    for nazwy in sorted(atlas.keys(), reverse = True):
+                        for cechy in atlas[nazwy]:
+                            if (atlas[nazwy][cechy] == "Nie"):
+                                print(nazwy,", Jadalny: ",atlas[nazwy][cechy])
+                    break             
+            else:
+                print("Błąd w komendzie. Spróbój ponownie.")
+                continue
+
+    elif (wybor == "EDYTUJ"):
+        while True:
+            edytowanaNazwa = str(input("Podaj nazwę grzyba, którego chcesz edytować: ").capitalize())
+            if edytowanaNazwa in atlas:
+                print()
+                atlas[edytowanaNazwa]["Rozmiar"] = str(input("Podaj wymiary trzonka i kapelusza: "))
+                atlas[edytowanaNazwa]["Kolor"] = str(input("Podaj kolor kapelusza: "))
+                jadalnoscEdytowana = str(input("Czy grzyb jest jadalny? TAK/NIE: ").capitalize())
+                while True:
+                    if (jadalnoscEdytowana == "Tak") or (jadalnoscEdytowana == "Nie"):
+                        atlas[edytowanaNazwa]["Jadalny"] = jadalnoscEdytowana
+                        break
+                    else:
+                        print("Błąd. Jadalność grzyba może być tylko TAK lub NIE. Spróbuj ponownie")
+                        jadalnoscEdytowana = str(input("Czy grzyb jest jadalny? TAK/NIE: ").capitalize())
+                        continue
+                print()
+                wpis = str(input("Edycja zapisana w atlasie. Czy chcesz zobaczyć aktualny wpis dotyczący wpisu: " + edytowanaNazwa + " TAK/NIE ").upper())
+                if (wpis == "TAK"):
+                    print()
+                    print(edytowanaNazwa)
+                    for grzyby in atlas:
+                        for cechy in atlas[grzyby]:
+                            if grzyby == edytowanaNazwa:
+                                print(cechy,":",atlas[grzyby][cechy])
+                break
+            else:
+                print("Nie ma takiego grzyba w atlasie")
+                    
     elif (wybor == "WYJDZ"):
         os._exit(0)
 
     else:
-        print("Nie wpisałeś prawidłowej komendy. Możliwe komendy: POKAZ / SZUKAJ / DODAJ / USUN / WYJDZ")
+        print("Nie wpisałeś prawidłowej komendy. Możliwe komendy: SPIS / FILTR / POKAZ / SZUKAJ / DODAJ / EDYTUJ / USUN / WYJDZ ")
         continue
