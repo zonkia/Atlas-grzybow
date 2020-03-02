@@ -222,7 +222,7 @@ while True:
                     print()
 
             else:
-                print("Błąd w komendzie. Spróbój ponownie.")
+                print("Błąd w komendzie. Spróbuj ponownie.")
                 continue
 
     elif (wybor == "EDYTUJ"):
