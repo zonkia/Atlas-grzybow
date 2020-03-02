@@ -167,13 +167,12 @@ while True:
             elif (filtr == "MALE"):
                 kolejnoscFiltr = str(input("Czy lista małych grzybów ma być wyświetlona od A->Z? TAK/NIE ").upper())
                 if kolejnoscFiltr == "TAK":
-                    print()
+
                     print("Lista małych grzybów od A->Z:")
                     for grzyby in sorted(indeksy.keys()):
                         if (indeksy[grzyby] < 500):
                             print(grzyby,"- Wysokość [cm]:", atlas[grzyby]["Wysokość [cm]"], ", Śr. Kapelusza [cm]:", atlas[grzyby]["Śr. Kapelusza [cm]"],", Szer. trzonu [cm]:", atlas[grzyby]["Szer. trzonu [cm]"])
                     break
-                    print()
                 else:
                     print()
                     print("Lista małych grzybów od Z->A:")
@@ -181,7 +180,6 @@ while True:
                         if (indeksy[grzyby] < 500):
                             print(grzyby, "- Wysokość [cm]:", atlas[grzyby]["Wysokość [cm]"], ", Śr. Kapelusza [cm]:", atlas[grzyby]["Śr. Kapelusza [cm]"],", Szer. trzonu [cm]:", atlas[grzyby]["Szer. trzonu [cm]"])
                     break
-                    print()
             
             elif (filtr == "SREDNIE"):
                 kolejnoscFiltr = str(input("Czy lista średnich grzybów ma być wyświetlona od A->Z? TAK/NIE ").upper())
@@ -192,7 +190,6 @@ while True:
                         if (indeksy[grzyby] > 500) and (indeksy[grzyby] < 1000):
                             print(grzyby,"- Wysokość [cm]:", atlas[grzyby]["Wysokość [cm]"], ", Śr. Kapelusza [cm]:", atlas[grzyby]["Śr. Kapelusza [cm]"],", Szer. trzonu [cm]:", atlas[grzyby]["Szer. trzonu [cm]"])
                     break
-                    print()
                 else:
                     print()
                     print("Lista średnich grzybów od Z->A:")
@@ -200,7 +197,7 @@ while True:
                         if (indeksy[grzyby] < 500):
                             print(grzyby, "- Wysokość [cm]:", atlas[grzyby]["Wysokość [cm]"], ", Śr. Kapelusza [cm]:", atlas[grzyby]["Śr. Kapelusza [cm]"],", Szer. trzonu [cm]:", atlas[grzyby]["Szer. trzonu [cm]"])
                     break
-                    print()
+
 
             elif (filtr == "DUZE"):
                 kolejnoscFiltr = str(input("Czy lista dużych grzybów ma być wyświetlona od A->Z? TAK/NIE ").upper())
@@ -211,7 +208,6 @@ while True:
                         if (indeksy[grzyby] > 1000):
                             print(grzyby,"- Wysokość [cm]:", atlas[grzyby]["Wysokość [cm]"], ", Śr. Kapelusza [cm]:", atlas[grzyby]["Śr. Kapelusza [cm]"],", Szer. trzonu [cm]:", atlas[grzyby]["Szer. trzonu [cm]"])
                     break
-                    print()
                 else:
                     print()
                     print("Lista dużych grzybów od Z->A:")
@@ -219,7 +215,6 @@ while True:
                         if (indeksy[grzyby] < 500):
                             print(grzyby, "- Wysokość [cm]:", atlas[grzyby]["Wysokość [cm]"], ", Śr. Kapelusza [cm]:", atlas[grzyby]["Śr. Kapelusza [cm]"],", Szer. trzonu [cm]:", atlas[grzyby]["Szer. trzonu [cm]"])
                     break
-                    print()
 
             else:
                 print("Błąd w komendzie. Spróbuj ponownie.")
