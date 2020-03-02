@@ -6,6 +6,8 @@ print("Wpisz SZUKAJ, aby wyszukac interesującego Ciebie grzyba")
 print("Wpisz DODAJ, aby dodać nowego grzyba i opis")
 print("Wpisz USUN, aby usunąć grzyba z atlasu")
 print("Wpisz WYJDZ, aby wyjsc z atlasu")
+print("Wpisz SPIS, aby zobaczyc spis nazw grzybów w atlasie")
+print("Wpisz FILTR, aby wyświetlnić tylko interesujące Ciebie grzyby")
 
 loop = 1
 loopSearch = 1
@@ -17,7 +19,7 @@ atlas = {
             "Kurka": {"Rozmiar": "Śr. Kapelusza: 1 - 12cm; Wys. trzonu: 3 -6cm; Szer. trzonu: do 2,5cm", "Kolor": "Żółty / pomarańczowożółty", "Jadalny": "Tak"}
 }
 
-while (loop == 1):
+while True:
     print()
     wybor = str(input("Twoja komenda: ").upper())
 
@@ -47,25 +49,21 @@ while (loop == 1):
                 ponowneSzukanie = str(input("Nie ma takiego grzyba. Czy chcesz spróbować ponownie wyszukać inną nazwę? TAK/NIE ").upper())
                 if ponowneSzukanie == "TAK":
                     continue
-                else:
-                    break
 
     elif (wybor == "DODAJ"):
-        NazwaGrzyba = str(input("Podaj nazwę grzyba: ").capitalize())
-        RozmiarGrzyba = str(input("Podaj wymiary kapelusza i trzonka: "))
-        KolorGrzyba = str(input("Podaj jaki kolor i cechy ma kapelusz: "))
-        JadalnoscGrzyba = str(input("Czy grzyb jest jadalny? TAK/NIE ").capitalize())
-        atlas[NazwaGrzyba] = {"Rozmiar":RozmiarGrzyba, "Kolor":KolorGrzyba, "Jadalny":JadalnoscGrzyba}
+        nazwaGrzyba = str(input("Podaj nazwę grzyba: ").capitalize())
+        rozmiarGrzyba = str(input("Podaj wymiary kapelusza i trzonka: "))
+        kolorGrzyba = str(input("Podaj jaki kolor i cechy ma kapelusz: "))
+        jadalnoscGrzyba = str(input("Czy grzyb jest jadalny? TAK/NIE ").capitalize())
+        atlas[nazwaGrzyba] = {"Rozmiar":rozmiarGrzyba, "Kolor":kolorGrzyba, "Jadalny":jadalnoscGrzyba}
         wpis = str(input("Dodano grzyba do atlasu. Czy chcesz zobaczyć wpis? TAK/NIE ").upper())
         if (wpis == "TAK"):
             print()
-            print(NazwaGrzyba)
+            print(nazwaGrzyba)
             for grzyby in atlas:
                 for cechy in atlas[grzyby]:
-                    if grzyby == NazwaGrzyba:
+                    if grzyby == nazwaGrzyba:
                         print(cechy,":",atlas[grzyby][cechy])
-                    else:
-                        pass
         else:
             continue
 
@@ -95,6 +93,16 @@ while (loop == 1):
                     continue
                 else:
                     break
+
+    elif (wybor == "SPIS"):
+        rosnacaLista = str(input("Czy lista ma być A-Z? TAK/NIE ").upper())
+        if rosnacaLista == "TAK":
+
+            for nazwy in sorted(atlas.keys()):
+                print(nazwy)
+        else:
+            for nazwy in sorted(atlas.keys(), reverse = True):
+                print(nazwy)
 
     elif (wybor == "WYJDZ"):
         os._exit(0)
