@@ -20,7 +20,8 @@ atlas = {
             "Prawdziwek": {"Wysokość [cm]": 20, "Śr. Kapelusza [cm]": 25, "Szer. trzonu [cm]": 5, "Kolor": "Jasnobrązowy / ciemnobrązowy", "Jadalny": "Tak"},
             "Muchomor": {"Wysokość [cm]": 20, "Śr. Kapelusza [cm]": 20, "Szer. trzonu [cm]": 5, "Kolor": "Czerwony kapelusz z białymi kropkami", "Jadalny": "Nie"},
             "Kurka": {"Wysokość [cm]": 5, "Śr. Kapelusza [cm]": 8, "Szer. trzonu [cm]": 2.5, "Kolor": "Żółty / pomarańczowożółty", "Jadalny": "Tak"},
-            "Purchawka": {"Wysokość [cm]": 7, "Śr. Kapelusza [cm]": 4, "Szer. trzonu [cm]": 4, "Kolor": "Biały / Brązowy", "Jadalny": "Nie"}
+            "Purchawka": {"Wysokość [cm]": 7, "Śr. Kapelusza [cm]": 4, "Szer. trzonu [cm]": 4, "Kolor": "Biały / Brązowy", "Jadalny": "Nie"},
+            "Maślak": {"Wysokość [cm]": 10, "Śr. Kapelusza [cm]": 10, "Szer. trzonu [cm]": 2, "Kolor": "Biały / Brązowy", "Jadalny": "Nie"},
 }
 
 for nazwy in atlas:
@@ -167,17 +168,17 @@ while True:
             elif (filtr == "MALE"):
                 kolejnoscFiltr = str(input("Czy lista małych grzybów ma być wyświetlona od A->Z? TAK/NIE ").upper())
                 if kolejnoscFiltr == "TAK":
-
+                    print()
                     print("Lista małych grzybów od A->Z:")
                     for grzyby in sorted(indeksy.keys()):
-                        if (indeksy[grzyby] < 500):
+                        if (indeksy[grzyby] < 150):
                             print(grzyby,"- Wysokość [cm]:", atlas[grzyby]["Wysokość [cm]"], ", Śr. Kapelusza [cm]:", atlas[grzyby]["Śr. Kapelusza [cm]"],", Szer. trzonu [cm]:", atlas[grzyby]["Szer. trzonu [cm]"])
                     break
                 else:
                     print()
                     print("Lista małych grzybów od Z->A:")
                     for grzyby in sorted(indeksy.keys(), reverse = True):
-                        if (indeksy[grzyby] < 500):
+                        if (indeksy[grzyby] < 150):
                             print(grzyby, "- Wysokość [cm]:", atlas[grzyby]["Wysokość [cm]"], ", Śr. Kapelusza [cm]:", atlas[grzyby]["Śr. Kapelusza [cm]"],", Szer. trzonu [cm]:", atlas[grzyby]["Szer. trzonu [cm]"])
                     break
             
@@ -187,17 +188,16 @@ while True:
                     print()
                     print("Lista średnich grzybów od A->Z:")
                     for grzyby in sorted(indeksy.keys()):
-                        if (indeksy[grzyby] > 500) and (indeksy[grzyby] < 1000):
+                        if (indeksy[grzyby] > 150) and (indeksy[grzyby] < 1000):
                             print(grzyby,"- Wysokość [cm]:", atlas[grzyby]["Wysokość [cm]"], ", Śr. Kapelusza [cm]:", atlas[grzyby]["Śr. Kapelusza [cm]"],", Szer. trzonu [cm]:", atlas[grzyby]["Szer. trzonu [cm]"])
                     break
                 else:
                     print()
                     print("Lista średnich grzybów od Z->A:")
                     for grzyby in sorted(indeksy.keys(), reverse = True):
-                        if (indeksy[grzyby] < 500):
+                        if (indeksy[grzyby] > 150) and (indeksy[grzyby] < 1000):
                             print(grzyby, "- Wysokość [cm]:", atlas[grzyby]["Wysokość [cm]"], ", Śr. Kapelusza [cm]:", atlas[grzyby]["Śr. Kapelusza [cm]"],", Szer. trzonu [cm]:", atlas[grzyby]["Szer. trzonu [cm]"])
                     break
-
 
             elif (filtr == "DUZE"):
                 kolejnoscFiltr = str(input("Czy lista dużych grzybów ma być wyświetlona od A->Z? TAK/NIE ").upper())
@@ -212,7 +212,7 @@ while True:
                     print()
                     print("Lista dużych grzybów od Z->A:")
                     for grzyby in sorted(indeksy.keys(), reverse = True):
-                        if (indeksy[grzyby] < 500):
+                        if (indeksy[grzyby] > 1000):
                             print(grzyby, "- Wysokość [cm]:", atlas[grzyby]["Wysokość [cm]"], ", Śr. Kapelusza [cm]:", atlas[grzyby]["Śr. Kapelusza [cm]"],", Szer. trzonu [cm]:", atlas[grzyby]["Szer. trzonu [cm]"])
                     break
 
