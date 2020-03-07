@@ -21,6 +21,7 @@ atlas = {
             "Kurka": {"Wysokość [cm]": 5, "Śr. Kapelusza [cm]": 8, "Szer. trzonu [cm]": 2.5, "Kolor": "Żółty / pomarańczowożółty", "Jadalny": "Tak"},
             "Purchawka": {"Wysokość [cm]": 7, "Śr. Kapelusza [cm]": 4, "Szer. trzonu [cm]": 4, "Kolor": "Biały / Brązowy", "Jadalny": "Nie"},
             "Maślak": {"Wysokość [cm]": 10, "Śr. Kapelusza [cm]": 10, "Szer. trzonu [cm]": 2, "Kolor": "Brązowy", "Jadalny": "Tak"},
+            "Grzybcio": {"Wysokość [cm]": 2, "Śr. Kapelusza [cm]": 3, "Szer. trzonu [cm]": 2, "Kolor": "Grzybkowaty", "Jadalny": "Tak"}
 }
 
 maleGrzyby = [
@@ -148,7 +149,6 @@ while True:
                 print(nazwy)
 
     elif (wybor == "FILTR"):
-
         while True:
             filtr = str(input("Jeśli chcesz zastosować podwójny filtr wpisz DWA. Jeśli chcesz zastosować filtr pojedynczy wpisz jakie grzyby chcesz wyfiltrować: JADALNE, NIEJADALNE, MALE, SREDNIE, DUZE: ").upper())
             if (filtr == "JADALNE"):
@@ -244,16 +244,35 @@ while True:
                 kolejnoscFiltr = str(input("Czy wyniki filtrowania mają być wyświetlone od A->Z? TAK/NIE ").upper())
                 if kolejnoscFiltr == "TAK":
                     print()
+                    print("Poniżej lista od A->Z grzybów:",filtrRozmiar,", Jadalne:", filtrJadalne.upper())
                     if filtrRozmiar == "MALE":
-                        for nazwy in maleGrzyby:
+                        for nazwy in sorted(maleGrzyby):
                             if atlas[nazwy]["Jadalny"] == filtrJadalne:
                                 zbior.append(nazwy)
                     elif filtrRozmiar == "SREDNIE":
-                        for nazwy in srednieGrzyby:
+                        for nazwy in sorted(srednieGrzyby):
                             if atlas[nazwy]["Jadalny"] == filtrJadalne:
                                 zbior.append(nazwy)
                     elif filtrRozmiar == "DUZE":
-                        for nazwy in duzeGrzyby:
+                        for nazwy in sorted(duzeGrzyby):
+                            if atlas[nazwy]["Jadalny"] == filtrJadalne:
+                                zbior.append(nazwy)
+                    for grzyby in zbior:
+                        print(grzyby,"- Wysokość [cm]:", atlas[grzyby]["Wysokość [cm]"], ", Śr. Kapelusza [cm]:", atlas[grzyby]["Śr. Kapelusza [cm]"],", Szer. trzonu [cm]:", atlas[grzyby]["Szer. trzonu [cm]"], ", Kolor:", atlas[grzyby]["Kolor"],", Jadalny:", atlas[grzyby]["Jadalny"])
+                    break
+                else:
+                    print()
+                    print("Poniżej lista od Z->A grzybów:",filtrRozmiar,", Jadalne:", filtrJadalne.upper())
+                    if filtrRozmiar == "MALE":
+                        for nazwy in sorted(maleGrzyby, reverse = True):
+                            if atlas[nazwy]["Jadalny"] == filtrJadalne:
+                                zbior.append(nazwy)
+                    elif filtrRozmiar == "SREDNIE":
+                        for nazwy in sorted(srednieGrzyby, reverse = True):
+                            if atlas[nazwy]["Jadalny"] == filtrJadalne:
+                                zbior.append(nazwy)
+                    elif filtrRozmiar == "DUZE":
+                        for nazwy in sorted(duzeGrzyby, reverse = True):
                             if atlas[nazwy]["Jadalny"] == filtrJadalne:
                                 zbior.append(nazwy)
                     for grzyby in zbior:
