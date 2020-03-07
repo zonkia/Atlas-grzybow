@@ -21,7 +21,7 @@ atlas = {
             "Muchomor": {"Wysokość [cm]": 20, "Śr. Kapelusza [cm]": 20, "Szer. trzonu [cm]": 5, "Kolor": "Czerwony kapelusz z białymi kropkami", "Jadalny": "Nie"},
             "Kurka": {"Wysokość [cm]": 5, "Śr. Kapelusza [cm]": 8, "Szer. trzonu [cm]": 2.5, "Kolor": "Żółty / pomarańczowożółty", "Jadalny": "Tak"},
             "Purchawka": {"Wysokość [cm]": 7, "Śr. Kapelusza [cm]": 4, "Szer. trzonu [cm]": 4, "Kolor": "Biały / Brązowy", "Jadalny": "Nie"},
-            "Maślak": {"Wysokość [cm]": 10, "Śr. Kapelusza [cm]": 10, "Szer. trzonu [cm]": 2, "Kolor": "Biały / Brązowy", "Jadalny": "Nie"},
+            "Maślak": {"Wysokość [cm]": 10, "Śr. Kapelusza [cm]": 10, "Szer. trzonu [cm]": 2, "Kolor": "Brązowy", "Jadalny": "Tak"},
 }
 
 for nazwy in atlas:
