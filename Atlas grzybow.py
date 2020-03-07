@@ -15,7 +15,6 @@ loop = 1
 loopSearch = 1
 loopDelete = 1
 
-indeksy = {}
 atlas = {
             "Prawdziwek": {"Wysokość [cm]": 20, "Śr. Kapelusza [cm]": 25, "Szer. trzonu [cm]": 5, "Kolor": "Jasnobrązowy / ciemnobrązowy", "Jadalny": "Tak"},
             "Muchomor": {"Wysokość [cm]": 20, "Śr. Kapelusza [cm]": 20, "Szer. trzonu [cm]": 5, "Kolor": "Czerwony kapelusz z białymi kropkami", "Jadalny": "Nie"},
@@ -24,11 +23,35 @@ atlas = {
             "Maślak": {"Wysokość [cm]": 10, "Śr. Kapelusza [cm]": 10, "Szer. trzonu [cm]": 2, "Kolor": "Brązowy", "Jadalny": "Tak"},
 }
 
-for nazwy in atlas:
-    for cechy in atlas[nazwy]:
-        if cechy == "Wysokość [cm]":
-            x = atlas[nazwy]["Wysokość [cm]"] * atlas[nazwy]["Śr. Kapelusza [cm]"] * atlas[nazwy]["Szer. trzonu [cm]"]
-            indeksy[nazwy] = x
+maleGrzyby = [
+                nazwy
+                for nazwy in atlas
+                if atlas[nazwy]["Wysokość [cm]"] * atlas[nazwy]["Śr. Kapelusza [cm]"] * atlas[nazwy]["Szer. trzonu [cm]"] < 150
+]
+
+srednieGrzyby = [
+                nazwy
+                for nazwy in atlas
+                if atlas[nazwy]["Wysokość [cm]"] * atlas[nazwy]["Śr. Kapelusza [cm]"] * atlas[nazwy]["Szer. trzonu [cm]"] > 150 and atlas[nazwy]["Wysokość [cm]"] * atlas[nazwy]["Śr. Kapelusza [cm]"] * atlas[nazwy]["Szer. trzonu [cm]"] < 1000
+]
+
+duzeGrzyby = [
+                nazwy
+                for nazwy in atlas
+                if atlas[nazwy]["Wysokość [cm]"] * atlas[nazwy]["Śr. Kapelusza [cm]"] * atlas[nazwy]["Szer. trzonu [cm]"] > 1000
+]
+
+jadalne = [
+            nazwy
+            for nazwy in atlas
+            if atlas[nazwy]["Jadalny"] == "Tak"
+]
+
+niejadalne = [
+            nazwy
+            for nazwy in atlas
+            if atlas[nazwy]["Jadalny"] == "Nie"
+]
 
 while True:
     print()
@@ -125,100 +148,117 @@ while True:
                 print(nazwy)
 
     elif (wybor == "FILTR"):
+
         while True:
-            filtr = str(input("Wpisz jakie chcesz wyfiltrować grzyby: JADALNE, NIEJADALNE, MALE, SREDNIE, DUZE: ").upper())
+            filtr = str(input("Jeśli chcesz zastosować podwójny filtr wpisz DWA. Jeśli chcesz zastosować filtr pojedynczy wpisz jakie grzyby chcesz wyfiltrować: JADALNE, NIEJADALNE, MALE, SREDNIE, DUZE: ").upper())
             if (filtr == "JADALNE"):
                 kolejnoscFiltr = str(input("Czy lista jadalnych grzybów ma być wyświetlona od A->Z? TAK/NIE ").upper())
                 if kolejnoscFiltr == "TAK":
                     print()
                     print("Lista jadalnych grzybów od A->Z:")
-                    for nazwy in sorted(atlas.keys()):
-                        for cechy in atlas[nazwy]:
-                            if (atlas[nazwy][cechy] == "Tak"):
-                                print(nazwy,", Jadalny: ",atlas[nazwy][cechy])
-                    break          
+                    for nazwy in sorted(jadalne):
+                        print(nazwy, ", Jadalny: ", atlas[nazwy]["Jadalny"])
+                    break
                 else:
                     print()
                     print("Lista jadalnych grzybów od Z->A:")
-                    for nazwy in sorted(atlas.keys(), reverse = True):
-                        for cechy in atlas[nazwy]:
-                            if (atlas[nazwy][cechy] == "Tak"):
-                                print(nazwy,", Jadalny: ",atlas[nazwy][cechy])
+                    for nazwy in sorted(jadalne, reverse = True):
+                        print(nazwy, ", Jadalny: ", atlas[nazwy]["Jadalny"])
                     break
 
             elif (filtr == "NIEJADALNE"):
-                kolejnoscFiltr = str(input("Czy lista jadalnych grzybów ma być wyświetlona od A->Z? TAK/NIE ").upper())
+                kolejnoscFiltr = str(input("Czy lista niejadalnych grzybów ma być wyświetlona od A->Z? TAK/NIE ").upper())
                 if kolejnoscFiltr == "TAK":
                     print()
                     print("Lista niejadalnych grzybów od A->Z:")
-                    for nazwy in sorted(atlas.keys()):
-                        for cechy in atlas[nazwy]:
-                            if (atlas[nazwy][cechy] == "Nie"):
-                                print(nazwy,", Jadalny: ",atlas[nazwy][cechy])
+                    for nazwy in sorted(niejadalne):
+                        print(nazwy, ", Jadalny: ", atlas[nazwy]["Jadalny"])
                     break
                 else:
                     print()
-                    print("Lista niejadalnych grzybów od Z->A:")
-                    for nazwy in sorted(atlas.keys(), reverse = True):
-                        for cechy in atlas[nazwy]:
-                            if (atlas[nazwy][cechy] == "Nie"):
-                                print(nazwy,", Jadalny: ",atlas[nazwy][cechy])
+                    print("Lista jadalnych grzybów od Z->A:")
+                    for nazwy in sorted(niejadalne, reverse = True):
+                        print(nazwy, ", Jadalny: ", atlas[nazwy]["Jadalny"])
                     break
 
             elif (filtr == "MALE"):
-                kolejnoscFiltr = str(input("Czy lista małych grzybów ma być wyświetlona od A->Z? TAK/NIE ").upper())
+                kolejnoscFiltr = str(input("Czy lista malych grzybów ma być wyświetlona od A->Z? TAK/NIE ").upper())
                 if kolejnoscFiltr == "TAK":
                     print()
-                    print("Lista małych grzybów od A->Z:")
-                    for grzyby in sorted(indeksy.keys()):
-                        if (indeksy[grzyby] < 150):
-                            print(grzyby,"- Wysokość [cm]:", atlas[grzyby]["Wysokość [cm]"], ", Śr. Kapelusza [cm]:", atlas[grzyby]["Śr. Kapelusza [cm]"],", Szer. trzonu [cm]:", atlas[grzyby]["Szer. trzonu [cm]"])
+                    print("Lista malych grzybów od A->Z:")
+                    for grzyby in sorted(maleGrzyby):
+                        print(grzyby,"- Wysokość [cm]:", atlas[grzyby]["Wysokość [cm]"], ", Śr. Kapelusza [cm]:", atlas[grzyby]["Śr. Kapelusza [cm]"],", Szer. trzonu [cm]:", atlas[grzyby]["Szer. trzonu [cm]"])
                     break
                 else:
                     print()
-                    print("Lista małych grzybów od Z->A:")
-                    for grzyby in sorted(indeksy.keys(), reverse = True):
-                        if (indeksy[grzyby] < 150):
-                            print(grzyby, "- Wysokość [cm]:", atlas[grzyby]["Wysokość [cm]"], ", Śr. Kapelusza [cm]:", atlas[grzyby]["Śr. Kapelusza [cm]"],", Szer. trzonu [cm]:", atlas[grzyby]["Szer. trzonu [cm]"])
+                    print("Lista malych grzybów od Z->A:")
+                    for grzyby in sorted(maleGrzyby, reverse = True):
+                        print(grzyby,"- Wysokość [cm]:", atlas[grzyby]["Wysokość [cm]"], ", Śr. Kapelusza [cm]:", atlas[grzyby]["Śr. Kapelusza [cm]"],", Szer. trzonu [cm]:", atlas[grzyby]["Szer. trzonu [cm]"])
                     break
-            
+
             elif (filtr == "SREDNIE"):
-                kolejnoscFiltr = str(input("Czy lista średnich grzybów ma być wyświetlona od A->Z? TAK/NIE ").upper())
+                kolejnoscFiltr = str(input("Czy lista srednich grzybów ma być wyświetlona od A->Z? TAK/NIE ").upper())
                 if kolejnoscFiltr == "TAK":
                     print()
-                    print("Lista średnich grzybów od A->Z:")
-                    for grzyby in sorted(indeksy.keys()):
-                        if (indeksy[grzyby] > 150) and (indeksy[grzyby] < 1000):
-                            print(grzyby,"- Wysokość [cm]:", atlas[grzyby]["Wysokość [cm]"], ", Śr. Kapelusza [cm]:", atlas[grzyby]["Śr. Kapelusza [cm]"],", Szer. trzonu [cm]:", atlas[grzyby]["Szer. trzonu [cm]"])
+                    print("Lista srednich grzybów od A->Z:")
+                    for grzyby in sorted(srednieGrzyby):
+                        print(grzyby,"- Wysokość [cm]:", atlas[grzyby]["Wysokość [cm]"], ", Śr. Kapelusza [cm]:", atlas[grzyby]["Śr. Kapelusza [cm]"],", Szer. trzonu [cm]:", atlas[grzyby]["Szer. trzonu [cm]"])
                     break
                 else:
                     print()
-                    print("Lista średnich grzybów od Z->A:")
-                    for grzyby in sorted(indeksy.keys(), reverse = True):
-                        if (indeksy[grzyby] > 150) and (indeksy[grzyby] < 1000):
-                            print(grzyby, "- Wysokość [cm]:", atlas[grzyby]["Wysokość [cm]"], ", Śr. Kapelusza [cm]:", atlas[grzyby]["Śr. Kapelusza [cm]"],", Szer. trzonu [cm]:", atlas[grzyby]["Szer. trzonu [cm]"])
+                    print("Lista srednich grzybów od Z->A:")
+                    for grzyby in sorted(srednieGrzyby, reverse = True):
+                        print(grzyby,"- Wysokość [cm]:", atlas[grzyby]["Wysokość [cm]"], ", Śr. Kapelusza [cm]:", atlas[grzyby]["Śr. Kapelusza [cm]"],", Szer. trzonu [cm]:", atlas[grzyby]["Szer. trzonu [cm]"])
                     break
 
             elif (filtr == "DUZE"):
-                kolejnoscFiltr = str(input("Czy lista dużych grzybów ma być wyświetlona od A->Z? TAK/NIE ").upper())
+                kolejnoscFiltr = str(input("Czy lista duzych grzybów ma być wyświetlona od A->Z? TAK/NIE ").upper())
                 if kolejnoscFiltr == "TAK":
                     print()
-                    print("Lista dużych grzybów od A->Z:")
-                    for grzyby in sorted(indeksy.keys()):
-                        if (indeksy[grzyby] > 1000):
-                            print(grzyby,"- Wysokość [cm]:", atlas[grzyby]["Wysokość [cm]"], ", Śr. Kapelusza [cm]:", atlas[grzyby]["Śr. Kapelusza [cm]"],", Szer. trzonu [cm]:", atlas[grzyby]["Szer. trzonu [cm]"])
+                    print("Lista duzych grzybów od A->Z:")
+                    for grzyby in sorted(duzeGrzyby):
+                        print(grzyby,"- Wysokość [cm]:", atlas[grzyby]["Wysokość [cm]"], ", Śr. Kapelusza [cm]:", atlas[grzyby]["Śr. Kapelusza [cm]"],", Szer. trzonu [cm]:", atlas[grzyby]["Szer. trzonu [cm]"])
                     break
                 else:
                     print()
-                    print("Lista dużych grzybów od Z->A:")
-                    for grzyby in sorted(indeksy.keys(), reverse = True):
-                        if (indeksy[grzyby] > 1000):
-                            print(grzyby, "- Wysokość [cm]:", atlas[grzyby]["Wysokość [cm]"], ", Śr. Kapelusza [cm]:", atlas[grzyby]["Śr. Kapelusza [cm]"],", Szer. trzonu [cm]:", atlas[grzyby]["Szer. trzonu [cm]"])
+                    print("Lista duzych grzybów od Z->A:")
+                    for grzyby in sorted(duzeGrzyby, reverse = True):
+                        print(grzyby,"- Wysokość [cm]:", atlas[grzyby]["Wysokość [cm]"], ", Śr. Kapelusza [cm]:", atlas[grzyby]["Śr. Kapelusza [cm]"],", Szer. trzonu [cm]:", atlas[grzyby]["Szer. trzonu [cm]"])
                     break
 
-            else:
-                print("Błąd w komendzie. Spróbuj ponownie.")
-                continue
+            elif (filtr == "DWA"):
+                while True:
+                    zbior = []
+                    print()
+                    filtrRozmiar = str(input("Najpierw podaj czy chcesz wyfiltrować MALE, SREDNIE czy DUZE grzyby: ").upper())
+                    if filtrRozmiar == "MALE" or filtrRozmiar == "SREDNIE" or filtrRozmiar == "DUZE":
+                        filtrJadalne = str(input("Czy wyfiltrowane grzyby mają być jadalne? TAK/NIE: ").capitalize())
+                        if filtrJadalne == "Tak" or filtrJadalne == "Nie":
+                            break
+                        else:
+                            print("Błąd spróbuj ponownie")
+                            continue
+                    else:
+                        print("Błąd spróbuj ponownie")
+                        continue
+                kolejnoscFiltr = str(input("Czy wyniki filtrowania mają być wyświetlone od A->Z? TAK/NIE ").upper())
+                if kolejnoscFiltr == "TAK":
+                    print()
+                    if filtrRozmiar == "MALE":
+                        for nazwy in maleGrzyby:
+                            if atlas[nazwy]["Jadalny"] == filtrJadalne:
+                                zbior.append(nazwy)
+                    elif filtrRozmiar == "SREDNIE":
+                        for nazwy in srednieGrzyby:
+                            if atlas[nazwy]["Jadalny"] == filtrJadalne:
+                                zbior.append(nazwy)
+                    elif filtrRozmiar == "DUZE":
+                        for nazwy in duzeGrzyby:
+                            if atlas[nazwy]["Jadalny"] == filtrJadalne:
+                                zbior.append(nazwy)
+                    for grzyby in zbior:
+                        print(grzyby,"- Wysokość [cm]:", atlas[grzyby]["Wysokość [cm]"], ", Śr. Kapelusza [cm]:", atlas[grzyby]["Śr. Kapelusza [cm]"],", Szer. trzonu [cm]:", atlas[grzyby]["Szer. trzonu [cm]"], ", Kolor:", atlas[grzyby]["Kolor"],", Jadalny:", atlas[grzyby]["Jadalny"])
+                    break
 
     elif (wybor == "EDYTUJ"):
         while True:
