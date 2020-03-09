@@ -11,10 +11,6 @@ print("Wpisz EDYTUJ, aby edytować obecny wpis")
 print("Wpisz USUN, aby usunąć grzyba z atlasu")
 print("Wpisz WYJDZ, aby wyjsc z atlasu")
 
-loop = 1
-loopSearch = 1
-loopDelete = 1
-
 atlas = {
             "Prawdziwek": {"Wysokość [cm]": 20, "Śr. Kapelusza [cm]": 25, "Szer. trzonu [cm]": 5, "Kolor": "Jasnobrązowy / ciemnobrązowy", "Jadalny": "Tak"},
             "Muchomor": {"Wysokość [cm]": 20, "Śr. Kapelusza [cm]": 20, "Szer. trzonu [cm]": 5, "Kolor": "Czerwony kapelusz z białymi kropkami", "Jadalny": "Nie"},
@@ -67,7 +63,7 @@ while True:
         continue
                 
     elif (wybor == "SZUKAJ"):
-        while loopSearch == 1:
+        while True:
             szukany = str(input("Szukaj grzyba: ").capitalize())
             try:
                 print()
@@ -110,7 +106,7 @@ while True:
             continue
 
     elif (wybor == "USUN"):
-        while loopDelete == 1:
+        while True:
             doUsuniecia = str(input("Podaj nazwę grzyba do usunięcia z atlasu: ").capitalize())
             try:
                 del(atlas[doUsuniecia])
@@ -236,10 +232,10 @@ while True:
                         if filtrJadalne == "Tak" or filtrJadalne == "Nie":
                             break
                         else:
-                            print("Błąd spróbuj ponownie")
+                            print("Jadalność może być tylko TAK lub NIE. Spróbuj ponownie)
                             continue
                     else:
-                        print("Błąd spróbuj ponownie")
+                        print("Błąd w nazwie spróbuj ponownie")
                         continue
                 kolejnoscFiltr = str(input("Czy wyniki filtrowania mają być wyświetlone od A->Z? TAK/NIE ").upper())
                 if kolejnoscFiltr == "TAK":
