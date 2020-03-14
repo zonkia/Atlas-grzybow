@@ -232,7 +232,7 @@ while True:
                         if filtrJadalne == "Tak" or filtrJadalne == "Nie":
                             break
                         else:
-                            print("Jadalność może być tylko TAK lub NIE. Spróbuj ponownie)
+                            print("Jadalność może być tylko TAK lub NIE. Spróbuj ponownie")
                             continue
                     else:
                         print("Błąd w nazwie spróbuj ponownie")
