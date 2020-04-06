@@ -1,0 +1,65 @@
+﻿{
+    "Grzybcio": {
+        "Jadalny": "Tak",
+        "Kolor": "Grzybkowaty",
+        "Szer. trzonu [cm]": 2,
+        "Wysokość [cm]": 2,
+        "Śr. Kapelusza [cm]": 3
+    },
+    "Kurka": {
+        "Jadalny": "Tak",
+        "Kolor": "Żółty / pomarańczowożółty",
+        "Szer. trzonu [cm]": 2.5,
+        "Wysokość [cm]": 5,
+        "Śr. Kapelusza [cm]": 8
+    },
+    "Maślak": {
+        "Jadalny": "Tak",
+        "Kolor": "Brązowy",
+        "Szer. trzonu [cm]": 2,
+        "Wysokość [cm]": 10,
+        "Śr. Kapelusza [cm]": 10
+    },
+    "Muchomor": {
+        "Jadalny": "Nie",
+        "Kolor": "Czerwony kapelusz z białymi kropkami",
+        "Szer. trzonu [cm]": 5,
+        "Wysokość [cm]": 20,
+        "Śr. Kapelusza [cm]": 20
+    },
+    "Prawdziwek": {
+        "Jadalny": "Tak",
+        "Kolor": "Jasnobrązowy / ciemnobrązowy",
+        "Szer. trzonu [cm]": 5.0,
+        "Wysokość [cm]": 20.0,
+        "Śr. Kapelusza [cm]": 25.0
+    },
+    "Purchawka": {
+        "Jadalny": "Nie",
+        "Kolor": "Biały / Brązowy",
+        "Szer. trzonu [cm]": 4,
+        "Wysokość [cm]": 7,
+        "Śr. Kapelusza [cm]": 4
+    },
+    "Grzybau": {
+        "Jadalny": "Tak",
+        "Kolor": "biały",
+        "Szer. trzonu [cm]": 3.0,
+        "Wysokość [cm]": 22.0,
+        "Śr. Kapelusza [cm]": 11.0
+    },
+    "Jadalny grzybek": {
+        "Jadalny": "Tak",
+        "Kolor": "żółty",
+        "Szer. trzonu [cm]": 2.0,
+        "Wysokość [cm]": 15.0,
+        "Śr. Kapelusza [cm]": 12.0
+    },
+    "Niejadalny grzybek": {
+        "Jadalny": "Nie",
+        "Kolor": "czerwony",
+        "Szer. trzonu [cm]": 4.0,
+        "Wysokość [cm]": 4.0,
+        "Śr. Kapelusza [cm]": 4.0
+    }
+}

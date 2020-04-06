@@ -1,4 +1,11 @@
 import os
+import ast
+import json
+os.chdir(os.path.dirname(__file__))
+
+with open("atlas.json", "r", encoding="UTF-8-sig") as atlas_file_json:
+    atlas = json.load(atlas_file_json)
+
 
 print("Witaj w atlasie grzybów. Wybierz co chcesz zrobić:")
 print()
@@ -11,48 +18,39 @@ print("Wpisz EDYTUJ, aby edytować obecny wpis")
 print("Wpisz USUN, aby usunąć grzyba z atlasu")
 print("Wpisz WYJDZ, aby wyjsc z atlasu")
 
-atlas = {
-            "Prawdziwek": {"Wysokość [cm]": 20, "Śr. Kapelusza [cm]": 25, "Szer. trzonu [cm]": 5, "Kolor": "Jasnobrązowy / ciemnobrązowy", "Jadalny": "Tak"},
-            "Muchomor": {"Wysokość [cm]": 20, "Śr. Kapelusza [cm]": 20, "Szer. trzonu [cm]": 5, "Kolor": "Czerwony kapelusz z białymi kropkami", "Jadalny": "Nie"},
-            "Kurka": {"Wysokość [cm]": 5, "Śr. Kapelusza [cm]": 8, "Szer. trzonu [cm]": 2.5, "Kolor": "Żółty / pomarańczowożółty", "Jadalny": "Tak"},
-            "Purchawka": {"Wysokość [cm]": 7, "Śr. Kapelusza [cm]": 4, "Szer. trzonu [cm]": 4, "Kolor": "Biały / Brązowy", "Jadalny": "Nie"},
-            "Maślak": {"Wysokość [cm]": 10, "Śr. Kapelusza [cm]": 10, "Szer. trzonu [cm]": 2, "Kolor": "Brązowy", "Jadalny": "Tak"},
-            "Grzybcio": {"Wysokość [cm]": 2, "Śr. Kapelusza [cm]": 3, "Szer. trzonu [cm]": 2, "Kolor": "Grzybkowaty", "Jadalny": "Tak"}
-}
-
-maleGrzyby = [
-                nazwy
-                for nazwy in atlas
-                if atlas[nazwy]["Wysokość [cm]"] * atlas[nazwy]["Śr. Kapelusza [cm]"] * atlas[nazwy]["Szer. trzonu [cm]"] < 150
-]
-
-srednieGrzyby = [
-                nazwy
-                for nazwy in atlas
-                if atlas[nazwy]["Wysokość [cm]"] * atlas[nazwy]["Śr. Kapelusza [cm]"] * atlas[nazwy]["Szer. trzonu [cm]"] > 150 and atlas[nazwy]["Wysokość [cm]"] * atlas[nazwy]["Śr. Kapelusza [cm]"] * atlas[nazwy]["Szer. trzonu [cm]"] < 1000
-]
-
-duzeGrzyby = [
-                nazwy
-                for nazwy in atlas
-                if atlas[nazwy]["Wysokość [cm]"] * atlas[nazwy]["Śr. Kapelusza [cm]"] * atlas[nazwy]["Szer. trzonu [cm]"] > 1000
-]
-
-jadalne = [
-            nazwy
-            for nazwy in atlas
-            if atlas[nazwy]["Jadalny"] == "Tak"
-]
-
-niejadalne = [
-            nazwy
-            for nazwy in atlas
-            if atlas[nazwy]["Jadalny"] == "Nie"
-]
-
 while True:
     print()
     wybor = str(input("Twoja komenda: ").upper())
+
+    maleGrzyby = [
+                    nazwy
+                    for nazwy in atlas
+                    if atlas[nazwy]["Wysokość [cm]"] * atlas[nazwy]["Śr. Kapelusza [cm]"] * atlas[nazwy]["Szer. trzonu [cm]"] < 150
+    ]
+
+    srednieGrzyby = [
+                    nazwy
+                    for nazwy in atlas
+                    if atlas[nazwy]["Wysokość [cm]"] * atlas[nazwy]["Śr. Kapelusza [cm]"] * atlas[nazwy]["Szer. trzonu [cm]"] > 150 and atlas[nazwy]["Wysokość [cm]"] * atlas[nazwy]["Śr. Kapelusza [cm]"] * atlas[nazwy]["Szer. trzonu [cm]"] < 1000
+    ]
+
+    duzeGrzyby = [
+                    nazwy
+                    for nazwy in atlas
+                    if atlas[nazwy]["Wysokość [cm]"] * atlas[nazwy]["Śr. Kapelusza [cm]"] * atlas[nazwy]["Szer. trzonu [cm]"] > 1000
+    ]
+
+    jadalne = [
+                nazwy
+                for nazwy in atlas
+                if atlas[nazwy]["Jadalny"] == "Tak"
+    ]
+
+    niejadalne = [
+                nazwy
+                for nazwy in atlas
+                if atlas[nazwy]["Jadalny"] == "Nie"
+    ]
 
     if (wybor == "POKAZ"):
         for grzyby in atlas:
@@ -83,9 +81,11 @@ while True:
 
     elif (wybor == "DODAJ"):
         nazwaGrzyba = str(input("Podaj nazwę grzyba: ").capitalize())
-        rozmiarGrzyba = str(input("Podaj wymiary kapelusza i trzonka: "))
-        kolorGrzyba = str(input("Podaj jaki kolor i cechy ma kapelusz: "))
         jadalnoscGrzyba = str(input("Czy grzyb jest jadalny? TAK/NIE ").capitalize())
+        kolorGrzyba = str(input("Podaj jaki kolor i cechy ma kapelusz: "))
+        szerGrzyba = float(input("Podaj szerokość trzonu: "))
+        wysGrzyba = float(input("Podaj wysokość grzyba: "))
+        srGrzyba = float(input("Podaj średnicę kapelusza: "))
         while True:
             if jadalnoscGrzyba == "Tak" or jadalnoscGrzyba == "Nie":
                 break
@@ -93,7 +93,11 @@ while True:
                 print("Błąd. Jadalność grzyba może być tylko TAK lub NIE. Spróbuj ponownie")
                 jadalnoscGrzyba = str(input("Czy grzyb jest jadalny? TAK/NIE ").capitalize())
                 continue
-        atlas[nazwaGrzyba] = {"Rozmiar":rozmiarGrzyba, "Kolor":kolorGrzyba, "Jadalny":jadalnoscGrzyba}
+
+        with open("atlas.json", "w", encoding="UTF-8-sig") as new_atlas:
+            atlas[nazwaGrzyba] = {"Jadalny":jadalnoscGrzyba, "Kolor":kolorGrzyba, "Szer. trzonu [cm]":szerGrzyba, "Wysokość [cm]":wysGrzyba, "Śr. Kapelusza [cm]": srGrzyba}
+            json.dump(atlas, new_atlas, ensure_ascii=False, indent=4)
+
         wpis = str(input("Dodano grzyba do atlasu. Czy chcesz zobaczyć wpis? TAK/NIE ").upper())
         if (wpis == "TAK"):
             print()
@@ -110,6 +114,9 @@ while True:
             doUsuniecia = str(input("Podaj nazwę grzyba do usunięcia z atlasu: ").capitalize())
             try:
                 del(atlas[doUsuniecia])
+                with open("atlas.json", "w", encoding="UTF-8-sig") as new_atlas:
+                    json.dump(atlas, new_atlas, ensure_ascii=False, indent=4)
+
                 print()
                 wpis = str(input("Usunięto grzyba z atlasu. Czy chcesz zobaczyć aktualny atlas? TAK/NIE ").upper())
                 if (wpis == "TAK"):
@@ -280,9 +287,11 @@ while True:
             edytowanaNazwa = str(input("Podaj nazwę grzyba, którego chcesz edytować: ").capitalize())
             if edytowanaNazwa in atlas:
                 print()
-                atlas[edytowanaNazwa]["Rozmiar"] = str(input("Podaj wymiary trzonka i kapelusza: "))
-                atlas[edytowanaNazwa]["Kolor"] = str(input("Podaj kolor kapelusza: "))
                 jadalnoscEdytowana = str(input("Czy grzyb jest jadalny? TAK/NIE: ").capitalize())
+                atlas[edytowanaNazwa]["Kolor"] = str(input("Podaj kolor kapelusza: "))
+                atlas[edytowanaNazwa]["Szer. trzonu [cm]"] = float(input("Podaj szerokość trzonu: "))
+                atlas[edytowanaNazwa]["Wysokość [cm]"] = float(input("Podaj wysokość grzyba: "))
+                atlas[edytowanaNazwa]["Śr. Kapelusza [cm]"] = float(input("Podaj średnicę kapelusza: "))
                 while True:
                     if (jadalnoscEdytowana == "Tak") or (jadalnoscEdytowana == "Nie"):
                         atlas[edytowanaNazwa]["Jadalny"] = jadalnoscEdytowana
@@ -292,6 +301,8 @@ while True:
                         jadalnoscEdytowana = str(input("Czy grzyb jest jadalny? TAK/NIE: ").capitalize())
                         continue
                 print()
+                with open("atlas.json", "w", encoding="UTF-8-sig") as new_atlas:
+                    json.dump(atlas, new_atlas, ensure_ascii=False, indent=4)
                 wpis = str(input("Edycja zapisana w atlasie. Czy chcesz zobaczyć aktualny wpis dotyczący wpisu: " + edytowanaNazwa + " TAK/NIE ").upper())
                 if (wpis == "TAK"):
                     print()
