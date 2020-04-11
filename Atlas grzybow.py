@@ -6,7 +6,6 @@ os.chdir(os.path.dirname(__file__))
 with open("atlas.json", "r", encoding="UTF-8-sig") as atlas_file_json:
     atlas = json.load(atlas_file_json)
 
-
 print("Witaj w atlasie grzybów. Wybierz co chcesz zrobić:")
 print()
 print("Wpisz SPIS, aby zobaczyc spis nazw grzybów w atlasie")
